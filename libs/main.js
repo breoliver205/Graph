@@ -3,6 +3,7 @@ var Graph = {};
 Graph.__VERSION = "v1.0";
 Graph.__NAME = "Graph";
 Graph.__LENGTH = 0;
+Graph.components = {};
 
 Graph.create = function(options = {}){
 	let config = {}, type;
@@ -27,4 +28,10 @@ Graph.Component = function(type, config){
 	
 	this.type = type;
 	Object.assign(this, Graph.components);
+};
+
+Graph.createComponent = function(componentName, componentConfig){
+	if (componentName in Graph.components) return false;
+	Graph.components[componentName] = Object.assign({}, componentConfig);
+	return true;
 };
